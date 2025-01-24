@@ -1,3 +1,4 @@
 import Loader from "./Loader";
+import Error from "./Error";
 
-export { Loader };
+export { Loader, Error };
