@@ -3,17 +3,19 @@ import Nav from "./Nav";
 import { Outlet } from "react-router";
 import { Loader } from "../components";
 import Offline from "./Offline";
-import { useIternetCheck } from "../hooks";
+import { useIternetCheck, useScrollToTop } from "../hooks";
 
 const Layout = () => {
   const isOnline = useIternetCheck();
+  const scrollTop = useScrollToTop();
 
   return (
-    <div>
-      <header className="">
+    <div className="">
+      <nav className={`${scrollTop ? "bg-black text-white" : "bg-gray-300"} sticky z-10 top-0`}>
         <Nav />
-      </header>
-      <main className="p-2">
+      </nav>
+
+      <main className="">
         <Suspense fallback={<Loader />}>
           {isOnline ? <Outlet /> : <Offline />}
         </Suspense>
