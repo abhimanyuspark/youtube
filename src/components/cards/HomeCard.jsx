@@ -1,18 +1,36 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router";
-import { formatViews } from "../utilities/utils";
-import image from "../assets/avatar.png";
-import { IoRadio } from "../Icons/Icons";
+import { formatViews } from "../../utils/utils";
+import VideoPlayer from "../VideoPlayer";
+import image from "../../assets/avatar.png";
+import { IoRadio } from "../../assets/Icons";
 
-const Card = ({ content }) => {
+const HomeCard = ({ content }) => {
+  const [hover, setHover] = useState(false);
+  const ref = useRef(null);
   const view = content?.stats?.views || content?.stats?.viewers;
   const publish =
     content?.publishedTimeText === null
       ? "watching"
       : `views . ${content?.publishedTimeText}`;
 
+  const onEnter = () => {
+    ref.current = setTimeout(() => {
+      setHover(true);
+    }, 2000);
+  };
+
+  const onLeave = () => {
+    setHover(false);
+    clearTimeout(ref.current);
+  };
+
   return (
-    <div className="grid grid-rows-[250px_auto] justify-between size-full">
+    <div
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+      className="relative grid grid-rows-[250px_auto] justify-between size-full"
+    >
       {/* Image */}
 
       <Link
@@ -27,11 +45,22 @@ const Card = ({ content }) => {
             title={content?.title}
           />
         )}
+
+        {/* badge */}
+
         {content?.isLiveNow === true && (
           <span className="absolute bottom-2 right-2 bg-red-600 flex items-center gap-1 text-white px-1 text-sm rounded-sm">
             <IoRadio />
             {content?.badges?.[0]}
           </span>
+        )}
+
+        {/* on hover play */}
+
+        {hover && (
+          <div className="absolute inset-0">
+            <VideoPlayer videoId={content?.videoId} />
+          </div>
         )}
       </Link>
 
@@ -57,7 +86,10 @@ const Card = ({ content }) => {
         </Link>
 
         <div className="flex flex-col justify-between">
-          <Link to={`/watch/${content?.videoId}`} className="line-clamp-2 leading-5">
+          <Link
+            to={`/watch/${content?.videoId}`}
+            className="line-clamp-2 leading-5"
+          >
             {content?.title}
           </Link>
           <Link
@@ -80,4 +112,4 @@ const Card = ({ content }) => {
   );
 };
 
-export default Card;
+export default HomeCard;

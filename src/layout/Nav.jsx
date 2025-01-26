@@ -1,13 +1,8 @@
 import React from "react";
-import {
-  FaBars,
-  TiHome,
-  FaFire,
-  BsCollectionPlay,
-  MdPlaylistPlay,
-} from "../Icons/Icons";
+import { FaBars } from "../assets/Icons";
 import { useClickOutside, useScrollToTop, useToggle } from "../hooks";
-import { Link } from "react-router";
+import { NavLink } from "react-router";
+import { NavigationData as data } from "../utils/constants";
 
 const Nav = () => {
   const [toggle, handleToggle] = useToggle();
@@ -19,56 +14,49 @@ const Nav = () => {
   });
 
   return (
-    <div className="flex justify-between items-center px-7 py-4">
+    <div
+      className={`flex justify-between items-center px-7 py-4 ${
+        scrollTop ? "bg-black" : ""
+      }`}
+    >
       <div className="flex items-center gap-6">
-        <FaBars onClick={handleToggle} className="size-5 cursor-pointer" />
+        <div onClick={handleToggle} className="click cursor-pointer">
+          <FaBars className="size-5" />
+        </div>
         <h2 className="text-lg font-semibold">Youtube</h2>
       </div>
 
       {toggle && (
-        <ul ref={ref} className={`${scrollTop ? "bg-black" : "bg-gray-300"} w-60 fixed top-0 left-0 h-full`}>
+        <ul
+          ref={ref}
+          className={`${
+            scrollTop ? "bg-black" : "bg-gray-900"
+          } w-60 fixed z-10 top-0 left-0 h-full`}
+        >
           {/* headers */}
-          <div className="flex items-center gap-6 px-7 py-4">
-            <FaBars onClick={handleToggle} className="size-5 cursor-pointer" />
+          <li className="flex items-center gap-6 px-7 py-4">
+            <div onClick={handleToggle} className="click cursor-pointer">
+              <FaBars className="size-5" />
+            </div>
             <h2 className="text-lg font-semibold">Youtube</h2>
-          </div>
+          </li>
           {/* content */}
-          <Contant />
+          <Content />
         </ul>
       )}
     </div>
   );
 };
 
-const data = [
-  {
-    title: "Home",
-    icon: TiHome,
-    path: "/",
-  },
-  {
-    title: "Trending",
-    icon: FaFire,
-    path: "/trending",
-  },
-  {
-    title: "Subscriptions",
-    icon: BsCollectionPlay,
-    path: "/subscriptions",
-  },
-  {
-    title: "PlayList",
-    icon: MdPlaylistPlay,
-    path: "/playlist",
-  },
-];
-
-const Contant = () => {
+const Content = () => {
   return (
-    <ul className="px-4.5 py-2">
+    <ul className="px-2 py-2 flex flex-col gap-0.5 h-[calc(100vh-60px)] overflow-y-scroll scroll">
       {data.map((n, i) => (
         <li key={i}>
           <Item n={n} />
+          {n?.divider === true && (
+            <hr className="border-t border-gray-700 mt-2.5 mb-2" />
+          )}
         </li>
       ))}
     </ul>
@@ -77,10 +65,17 @@ const Contant = () => {
 
 const Item = ({ n }) => {
   return (
-    <Link to={n.path} className="flex gap-6 p-2 rounded-lg items-center hover:bg-[rgba(0,0,0,0.1)]">
+    <NavLink
+      className={({ isActive }) =>
+        `${
+          isActive ? "bg-gray-700" : "hover:bg-gray-700"
+        } flex gap-6 py-2 px-4.5 rounded-md items-center`
+      }
+      to={n.path}
+    >
       <n.icon className="size-7" />
       <span className="text-sm">{n.title}</span>
-    </Link>
+    </NavLink>
   );
 };
 

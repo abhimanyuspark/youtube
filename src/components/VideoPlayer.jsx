@@ -6,21 +6,22 @@ const VideoPlayer = ({ videoId }) => {
   const src = `https://www.youtube.com/embed/${videoId}`;
 
   useEffect(() => {
-    setLoading(true);
+    if(videoId){
+      setLoading(true);
+    }
   }, [videoId]);
 
   return (
     <div
-      title={videoId}
-      className="w-full relative pb-[50%] sm:pb-[30%] bg-black rounded-sm overflow-hidden"
+      className="relative w-full h-full bg-black"
     >
       {loading && (
         <Loader />
       )}
       <iframe
-        src={src}
-        title={videoId}
-        className="absolute inset-0 w-full h-full"
+        src={`${src}?autoplay=true`}
+        title={src}
+        className="w-full h-full"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen={true}
         onLoad={() => setLoading(false)}

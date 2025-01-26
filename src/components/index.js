@@ -1,6 +1,7 @@
 import Loader from "./Loader";
 import Error from "./Error";
 import VideoPlayer from "./VideoPlayer";
-import Card from "./Card"
+import HomeCard from "./cards/HomeCard"
+import Offline from "./Offline";
 
-export { Loader, Error, VideoPlayer, Card };
+export { Loader, Error, VideoPlayer, HomeCard, Offline };

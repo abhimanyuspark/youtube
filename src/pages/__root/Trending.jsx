@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import { HomeCard, Loader, Error } from "../../components";
+import { Loader, Error, HomeCard } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchVideos } from "../../redux/server/server";
 
-const Dashboard = () => {
+const Trending = () => {
   const dispatch = useDispatch();
   const { videos, error, loading } = useSelector((state) => state.youtube);
 
   // useEffect(() => {
-  //   dispatch(fetchVideos("New"));
+  //   dispatch(fetchVideos("Trending"));
   // }, [dispatch]);
 
   if (loading) {
@@ -32,4 +32,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Trending;

@@ -1,1 +1,24 @@
 @import "tailwindcss";
+
+body {
+  scroll-behavior: smooth;
+  @apply bg-gray-950 text-white;
+}
+
+.scroll {
+  scrollbar-width: thin;
+}
+
+.click {
+  position: relative;
+  &:hover::before {
+    content: "";
+    z-index: -1;
+    @apply p-5 absolute rounded-full -top-2.5 -left-2.5 bg-gray-700;
+  }
+  &:active::before {
+    content: "";
+    z-index: -1;
+    @apply p-5 absolute rounded-full -top-2.5 -left-2.5 bg-gray-900;
+  }
+}
