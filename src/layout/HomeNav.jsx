@@ -15,7 +15,11 @@ const HomeNav = ({ handleToggle }) => {
         <div onClick={handleToggle} className="click cursor-pointer">
           <FaBars className="size-5" />
         </div>
+<<<<<<< HEAD
         <h2 className="text-lg font-semibold">YouTube</h2>
+=======
+        <h2 className="text-lg font-semibold">Youtube</h2>
+>>>>>>> 62f829320ff2b1c9c3c95ea855db46131bd723ea
       </div>
     </div>
   );
