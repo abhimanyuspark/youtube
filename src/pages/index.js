@@ -2,7 +2,7 @@ import { lazy } from "react";
 
 const Dashboard = lazy(() => import("./__root/Dashboard"));
 const Watch = lazy(() => import("./__root/Watch"));
-const Trending = lazy(() => import("./__root/Trending"));
+const Explore = lazy(() => import("./__root/Explore"));
 const Notfound = lazy(() => import("./__auth/Notfound"));
 
-export { Dashboard ,Notfound, Watch, Trending };
+export { Dashboard ,Notfound, Watch, Explore };

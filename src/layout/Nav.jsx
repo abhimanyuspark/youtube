@@ -7,11 +7,7 @@ import { NavigationData as data } from "../utils/constants";
 const Nav = () => {
   const [toggle, handleToggle] = useToggle();
   const scrollTop = useScrollToTop();
-  const ref = useClickOutside(() => {
-    if (toggle) {
-      handleToggle();
-    }
-  });
+  const ref = useClickOutside(handleToggle);
 
   return (
     <div
@@ -23,7 +19,7 @@ const Nav = () => {
         <div onClick={handleToggle} className="click cursor-pointer">
           <FaBars className="size-5" />
         </div>
-        <h2 className="text-lg font-semibold">Youtube</h2>
+        <h2 className="text-lg font-semibold">YouTube</h2>
       </div>
 
       {toggle && (
@@ -38,7 +34,7 @@ const Nav = () => {
             <div onClick={handleToggle} className="click cursor-pointer">
               <FaBars className="size-5" />
             </div>
-            <h2 className="text-lg font-semibold">Youtube</h2>
+            <h2 className="text-lg font-semibold">YouTube</h2>
           </li>
           {/* content */}
           <Content />
