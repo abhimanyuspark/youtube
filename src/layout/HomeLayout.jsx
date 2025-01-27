@@ -35,7 +35,7 @@ const Side = ({ toggle }) => {
     <aside
       className={`${scrollTop ? "bg-black" : ""} ${
         toggle ? "w-60" : "w-20"
-      } transition-all sticky top-15 left-0 h-[calc(100vh-60px)]`}
+      } sticky top-15 left-0 h-[calc(100vh-60px)]`}
     >
       {/* content */}
       <Content toggle={toggle} />
@@ -64,11 +64,11 @@ const Item = ({ n, toggle }) => {
       className={({ isActive }) =>
         `${isActive ? "bg-gray-700" : "hover:bg-gray-700"} ${
           toggle ? "gap-6" : "flex-col gap-2"
-        } flex py-2 px-4.5 rounded-md items-center`
+        } flex py-2 px-5 rounded-md items-center`
       }
       to={n.path}
     >
-      <n.icon className="size-7" />
+      <n.icon className="size-6" />
       <span className={`${toggle ? "text-md" : "text-xs"}`}>{n.title}</span>
     </NavLink>
   );
