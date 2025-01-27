@@ -1,17 +1,21 @@
 import React, { Suspense } from "react";
 import Nav from "./Nav";
 import { Outlet } from "react-router";
-import { Loader } from "../components";
+import { Loader, Offline } from "../components";
+import { useIternetCheck } from "../hooks";
 
 const Layout = () => {
+  const isOnline = useIternetCheck();
+
   return (
     <div>
-      <header className="">
+      <nav className={`sticky z-10 top-0`}>
         <Nav />
-      </header>
-      <main className="">
+      </nav>
+
+      <main>
         <Suspense fallback={<Loader />}>
-          <Outlet />
+          {isOnline ? <Outlet /> : <Offline />}
         </Suspense>
       </main>
     </div>
