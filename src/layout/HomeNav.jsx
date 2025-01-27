@@ -1,6 +1,6 @@
 import React from "react";
-import { FaBars } from "../assets/Icons";
 import { useScrollToTop } from "../hooks";
+import NavHeader from "./NavHeader";
 
 const HomeNav = ({ handleToggle }) => {
   const scrollTop = useScrollToTop();
@@ -11,12 +11,7 @@ const HomeNav = ({ handleToggle }) => {
         scrollTop ? "bg-black" : ""
       }`}
     >
-      <div className="flex items-center gap-6">
-        <div onClick={handleToggle} className="click cursor-pointer">
-          <FaBars className="size-5" />
-        </div>
-        <h2 className="text-lg font-semibold">YouTube</h2>
-      </div>
+      <NavHeader handleToggle={handleToggle} />
     </div>
   );
 };
