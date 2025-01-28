@@ -10,7 +10,7 @@ const Nav = () => {
 
   return (
     <div
-      className={`flex justify-between items-center px-7 py-4 ${
+      className={`flex justify-between items-center px-7 h-15 ${
         scrollTop ? "bg-black" : ""
       }`}
     >
@@ -24,7 +24,7 @@ const Nav = () => {
           } w-60 fixed z-10 top-0 left-0 h-full`}
         >
           {/* headers */}
-          <NavHeader className="px-7 py-4" handleToggle={handleToggle}  />
+          <NavHeader className="px-7 h-15" handleToggle={()=> {handleToggle(false)}}  />
           {/* content */}
           <NavContent />
         </div>

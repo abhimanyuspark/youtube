@@ -7,7 +7,7 @@ const HomeNav = ({ handleToggle }) => {
 
   return (
     <div
-      className={`flex justify-between items-center px-7 py-4 ${
+      className={`flex justify-between items-center h-15 px-7 ${
         scrollTop ? "bg-black" : ""
       }`}
     >
