@@ -27,12 +27,12 @@ const HomeLayout = () => {
 
   return (
     <div>
-      <nav className={`sticky z-10 top-0`}>
+      <nav className={`sticky z-50 top-0`}>
         <HomeNav toggle={toggle} handleToggle={onToggle} />
       </nav>
 
       <main className="flex">
-        <Side toggle={toggle} isMobile={isMobile} />
+        <Side toggle={toggle} isMobile={isMobile} handleToggle={handleToggle} />
 
         <div className="flex-1">
           <Suspense fallback={<Loader />}>
@@ -44,7 +44,7 @@ const HomeLayout = () => {
   );
 };
 
-const Side = ({ toggle, isMobile }) => {
+const Side = ({ toggle, isMobile, handleToggle }) => {
   const scrollTop = useScrollToTop();
 
   return (
@@ -55,12 +55,19 @@ const Side = ({ toggle, isMobile }) => {
             ? "left-0 bg-gray-950"
             : "-left-60"
           : toggle
-            ? "w-60"
-            : "w-20"
-      } absolute sm:sticky top-15 sm:left-0 h-[calc(100vh-60px)]`}
+          ? "w-60"
+          : "w-20"
+      } fixed sm:sticky z-10 top-15 sm:left-0 h-[calc(100vh-60px)]`}
     >
       {/* content */}
-      <NavContent toggle={toggle} />
+      <NavContent
+        handleToggle={() => {
+          if (isMobile) {
+            handleToggle(false);
+          }
+        }}
+        toggle={toggle}
+      />
     </aside>
   );
 };

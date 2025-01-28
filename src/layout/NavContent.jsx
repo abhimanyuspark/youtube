@@ -2,11 +2,11 @@ import React from "react";
 import { NavLink } from "react-router";
 import { NavigationData as data } from "../utils/constants";
 
-const NavContent = ({ toggle = true }) => {
+const NavContent = ({ handleToggle, toggle = true }) => {
   return (
     <ul className="px-2 py-2 flex flex-col gap-0.5 h-[calc(100vh-60px)] overflow-y-auto overflow-x-hidden scroll">
       {data.slice(0, toggle ? data.length : 2).map((n, i) => (
-        <li key={i}>
+        <li key={i} onClick={handleToggle}>
           <Item n={n} toggle={toggle} />
           {n?.divider === true && toggle && (
             <hr className="border-t border-gray-700 mt-2.5 mb-2" />
