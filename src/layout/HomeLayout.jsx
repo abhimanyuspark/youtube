@@ -1,23 +1,38 @@
 import React, { Suspense } from "react";
 import { Outlet } from "react-router";
 import { Loader, Offline } from "../components";
-import { useIternetCheck, useScrollToTop, useToggle } from "../hooks";
+import {
+  useIternetCheck,
+  useLocalStorage,
+  useMediaQuery,
+  useScrollToTop,
+  useToggle,
+} from "../hooks";
 import HomeNav from "./HomeNav";
-import { NavLink } from "react-router";
-import { NavigationData as data } from "../utils/constants";
+import NavContent from "./NavContent";
 
 const HomeLayout = () => {
   const isOnline = useIternetCheck();
-  const [toggle, handleToggle] = useToggle();
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  const [localStorage, setLocalStorage] = useLocalStorage("menu", false);
+  const [toggle, handleToggle] = useToggle(localStorage);
+
+  const onToggle = () => {
+    handleToggle();
+    if (!isMobile) {
+      setLocalStorage(!toggle);
+    }
+  };
 
   return (
     <div>
-      <nav className={`sticky z-10 top-0`}>
-        <HomeNav handleToggle={handleToggle} />
+      <nav className={`sticky z-50 top-0`}>
+        <HomeNav toggle={toggle} handleToggle={onToggle} />
       </nav>
 
       <main className="flex">
-        <Side toggle={toggle} />
+        <Side toggle={toggle} isMobile={isMobile} handleToggle={handleToggle} />
 
         <div className="flex-1">
           <Suspense fallback={<Loader />}>
@@ -29,48 +44,31 @@ const HomeLayout = () => {
   );
 };
 
-const Side = ({ toggle }) => {
+const Side = ({ toggle, isMobile, handleToggle }) => {
   const scrollTop = useScrollToTop();
+
   return (
     <aside
       className={`${scrollTop ? "bg-black" : ""} ${
-        toggle ? "w-60" : "w-20"
-      } sticky top-15 left-0 h-[calc(100vh-60px)]`}
+        isMobile
+          ? toggle
+            ? "left-0 bg-gray-950"
+            : "-left-60"
+          : toggle
+          ? "w-60"
+          : "w-20"
+      } fixed sm:sticky z-10 top-15 sm:left-0 h-[calc(100vh-60px)]`}
     >
       {/* content */}
-      <Content toggle={toggle} />
+      <NavContent
+        handleToggle={() => {
+          if (isMobile) {
+            handleToggle(false);
+          }
+        }}
+        toggle={toggle}
+      />
     </aside>
-  );
-};
-
-const Content = ({ toggle }) => {
-  return (
-    <ul className="px-2 py-2 flex flex-col gap-0.5 h-[calc(100vh-60px)] overflow-y-auto overflow-x-hidden scroll">
-      {data.slice(0, toggle ? data.length : 2).map((n, i) => (
-        <li key={i}>
-          <Item n={n} toggle={toggle} />
-          {n?.divider === true && toggle && (
-            <hr className="border-t border-gray-700 mt-2.5 mb-2" />
-          )}
-        </li>
-      ))}
-    </ul>
-  );
-};
-
-const Item = ({ n, toggle }) => {
-  return (
-    <NavLink
-      className={({ isActive }) =>
-        `${isActive ? "bg-gray-700" : "hover:bg-gray-700"} ${
-          toggle ? "gap-6" : "flex-col gap-2"
-        } flex py-2 px-5 rounded-md items-center`
-      }
-      to={n.path}
-    >
-      <n.icon className="size-6" />
-      <span className={`${toggle ? "text-md" : "text-xs"}`}>{n.title}</span>
-    </NavLink>
   );
 };
 

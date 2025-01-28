@@ -12,17 +12,21 @@ const Dashboard = ({ category }) => {
   // }, [dispatch]);
 
   if (loading) {
-    <Loader />;
+    return <Loader />;
   }
 
   if (error?.message) {
     return <Error error={error?.message} />;
   }
 
+  if(loading === false && videos.length === 0){
+    return <Error error="No Data found" />
+  }
+
   return (
     <div>
       <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 p-4">
-        {videos?.contents?.map((d, i) => (
+        {videos?.map((d, i) => (
           <li key={i}>
             <HomeCard content={d?.video} />
           </li>

@@ -9,17 +9,28 @@ body {
   scrollbar-width: thin;
 }
 
-.click {
+.menu-click {
   position: relative;
   transition: all 0.5s ease-in-out;
+
   &:hover::before {
     content: "";
-    z-index: -1;
+    z-index: 0;
     @apply p-5 absolute rounded-full -top-2.5 -left-2.5 bg-gray-700;
   }
   &:active::before {
     content: "";
-    z-index: -1;
+    z-index: 0;
     @apply p-5 absolute rounded-full -top-2.5 -left-2.5 bg-gray-900;
+  }
+}
+
+.logo-after{
+  position: relative;
+
+  &::after{
+    content: "";
+    z-index: 0;
+    @apply p-2 absolute rounded-full top-3 left-3 bg-white;
   }
 }
