@@ -19,7 +19,7 @@ const Dashboard = ({ category }) => {
     return <Error error={error?.message} />;
   }
 
-  if(loading === false && videos.length === 0){
+  if(error?.message === "" && videos?.length === 0){
     return <Error error="No Data found" />
   }
 

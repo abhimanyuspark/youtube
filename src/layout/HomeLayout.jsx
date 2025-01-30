@@ -31,15 +31,15 @@ const HomeLayout = () => {
         <HomeNav toggle={toggle} handleToggle={onToggle} />
       </nav>
 
-      <main className="flex">
+      <div className="flex">
         <Side toggle={toggle} isMobile={isMobile} handleToggle={handleToggle} />
 
-        <div className="flex-1">
+        <main className="flex-1">
           <Suspense fallback={<Loader />}>
             {isOnline ? <Outlet /> : <Offline />}
           </Suspense>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 };
@@ -57,7 +57,7 @@ const Side = ({ toggle, isMobile, handleToggle }) => {
           : toggle
           ? "w-60"
           : "w-20"
-      } fixed sm:sticky z-10 top-15 sm:left-0 h-[calc(100vh-60px)]`}
+      } fixed sm:sticky z-10 top-15 h-[calc(100vh-60px)]`}
     >
       {/* content */}
       <NavContent

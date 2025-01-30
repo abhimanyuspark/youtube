@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router";
-import { formatViews } from "../../utils/utils";
+import { formatViews, formateSecounds } from "../../utils/utils";
 import VideoPlayer from "../VideoPlayer";
 import image from "../../assets/avatar.png";
 import { IoRadio } from "../../assets/Icons";
@@ -49,10 +49,15 @@ const HomeCard = ({ content }) => {
         {/* badge */}
 
         {content?.isLiveNow === true && (
-          <span className="absolute bottom-2 right-2 bg-red-600 flex items-center gap-1 text-white px-1 text-sm rounded-sm">
-            <IoRadio />
-            {content?.badges?.[0]}
-          </span>
+          <div className="absolute bottom-2 right-2 flex gap-2">
+            <span className="bg-black flex items-center gap-1 text-white px-1 text-sm rounded-sm">
+              {formateSecounds(content?.lengthSeconds)}
+            </span>
+            <span className="bg-red-600 flex items-center gap-1 text-white px-1 text-sm rounded-sm">
+              <IoRadio />
+              {content?.badges?.[0]}
+            </span>
+          </div>
         )}
 
         {/* on hover play */}

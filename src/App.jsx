@@ -1,10 +1,22 @@
-import { Dashboard, Notfound, Explore, Watch } from "./pages";
+import { Dashboard, Notfound, Explore, Watch, SignUp, SignIn } from "./pages";
 import { Route, Routes } from "react-router";
 import Layout from "./layout/Layout";
 import { NavigationData as category } from "./utils/constants";
 import HomeLayout from "./layout/HomeLayout";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { userDetails } from "./redux/server/authServer";
 
 function App() {
+  const { appUser } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (appUser?.id) {
+      dispatch(userDetails(appUser?.id));
+    }
+  }, []);
+
   return (
     <Routes>
       <Route element={<HomeLayout />}>
@@ -15,7 +27,11 @@ function App() {
       </Route>
 
       <Route element={<Layout />}>
+        <Route path="/signUp" element={<SignUp />} />
+        <Route path="/signIn" element={<SignIn />} />
+
         <Route path="/watch/:id" element={<Watch />} />
+
         <Route path="*" element={<Notfound />} />
       </Route>
     </Routes>
