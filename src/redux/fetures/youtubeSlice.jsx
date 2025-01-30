@@ -3,7 +3,6 @@ import { fetchVideos } from "../server/server";
 
 const initialState = {
   videos: [],
-  selectedVideo: {},
   loading: false,
   error: null,
 };

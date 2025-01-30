@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchVideoDetails } from "../server/server";
 
 const initialState = {
-  alldetails: [],
+  alldetails: {},
   loading: false,
   error: null,
 };
 
-const VideoDetails = createSlice({
+const videoDetails = createSlice({
   name: "youtube",
   initialState,
   reducers: {},
@@ -18,7 +18,7 @@ const VideoDetails = createSlice({
       })
       .addCase(fetchVideoDetails.fulfilled, (state, action) => {
         state.loading = false;
-        state.alldetails = action.payload;
+        state.alldetails = action?.payload;
       })
       .addCase(fetchVideoDetails.rejected, (state, action) => {
         state.loading = false;
@@ -27,4 +27,4 @@ const VideoDetails = createSlice({
   },
 });
 
-export default VideoDetails.reducer;
+export default videoDetails.reducer;

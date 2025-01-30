@@ -1,38 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { VideoPlayer } from "../../components";
-import { VideoDetails, videoComment } from "./demo";
-import { SlLike, SlDislike } from "react-icons/sl";
-import { MdOutlineFileDownload, MdOutlineSort } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-
+import { VideoPlayer } from "../../components";
+import { VideoDetails, videoComment, relatedVideo } from "./demo";
 import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
-} from "react-icons/md";
-import { TiArrowForwardOutline } from "react-icons/ti";
-import { relatedVideo } from "./demo";
+  MdOutlineFileDownload,
+  MdOutlineSort,
+  SlLike,
+  SlDislike,
+  TiArrowForwardOutline,
+} from "../../assets/Icons";
 import { fetchVideoDetails } from "../../redux/server/server";
 
 const Watch = () => {
-  const { viewDetails } = useSelector((state) => ({
-    viewDetails: state.details.alldetails,
-  }));
+  const { alldetails, loading, error } = useSelector((state) => state.details);
   const [descriptionLines, setdescriptionLines] = useState(false);
   const [reply, setReply] = useState(false);
   const { id } = useParams();
+
   const handleCLick = () => {
     setdescriptionLines(!descriptionLines);
   };
+
   const handlereply = () => {
     setReply(!reply);
   };
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchVideoDetails(id));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  console.log(viewDetails);
+  }, [dispatch, id]);
+
+  console.log(alldetails, loading, error?.message);
+
   return (
     <div className="flex grid-cols-2 gap-4 flex-wrap">
       <div className="w-5xl p-5">
@@ -67,7 +70,7 @@ const Watch = () => {
                     <SlDislike />
                   </div>
                 </div>
-                <div className="flex items-center mr-2 items-center justify-center rounded-xl  w-22 h-10 bg-gray-900">
+                <div className="flex items-center mr-2 justify-center rounded-xl  w-22 h-10 bg-gray-900">
                   <TiArrowForwardOutline className="text-2xl" /> shear
                 </div>
                 <div className="flex items-center justify-center rounded-xl  w-28 h-10 bg-gray-900">
