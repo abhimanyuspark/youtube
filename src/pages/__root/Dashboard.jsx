@@ -7,9 +7,9 @@ const Dashboard = ({ category }) => {
   const dispatch = useDispatch();
   const { videos, error, loading } = useSelector((state) => state.youtube);
 
-  // useEffect(() => {
-  //   dispatch(fetchVideos(category));
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchVideos(category));
+  }, [dispatch]);
 
   if (loading) {
     return <Loader />;
