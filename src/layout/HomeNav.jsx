@@ -1,6 +1,8 @@
 import React from "react";
 import { useScrollToTop } from "../hooks";
 import NavHeader from "./NavHeader";
+import NavSearch from "./NavSearch"
+import NavFooter from "./NavFooter";
 
 const HomeNav = ({ handleToggle }) => {
   const scrollTop = useScrollToTop();
@@ -12,6 +14,8 @@ const HomeNav = ({ handleToggle }) => {
       }`}
     >
       <NavHeader handleToggle={handleToggle} />
+      <NavSearch />
+      <NavFooter />
     </div>
   );
 };

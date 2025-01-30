@@ -1,30 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchVideos } from "../server/server";
+import { fetchVideoDetails } from "../server/server";
 
 const initialState = {
-  videos: [],
+  alldetails: {},
   loading: false,
   error: null,
 };
 
-const youtubeSlice = createSlice({
+const videoDetails = createSlice({
   name: "youtube",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchVideos.pending, (state) => {
+      .addCase(fetchVideoDetails.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchVideos.fulfilled, (state, action) => {
+      .addCase(fetchVideoDetails.fulfilled, (state, action) => {
         state.loading = false;
-        state.videos = action.payload?.contents;
+        state.alldetails = action?.payload;
       })
-      .addCase(fetchVideos.rejected, (state, action) => {
+      .addCase(fetchVideoDetails.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
   },
 });
 
-export default youtubeSlice.reducer;
+export default videoDetails.reducer;
