@@ -1,4 +1,4 @@
-import { Dashboard, Notfound, Explore, Watch, SignUp, SignIn } from "./pages";
+import { Dashboard, Notfound, Explore, Watch, SignUp, SignIn, Channel } from "./pages";
 import { Route, Routes } from "react-router";
 import Layout from "./layout/Layout";
 import { NavigationData as category } from "./utils/constants";
@@ -24,6 +24,7 @@ function App() {
         {category?.slice(1)?.map((c, i) => (
           <Route key={i} path={c.path} element={<Explore category={c} />} />
         ))}
+        <Route path ='/channel' element ={<Channel/>}/>
       </Route>
 
       <Route element={<Layout />}>
@@ -31,6 +32,7 @@ function App() {
         <Route path="/signIn" element={<SignIn />} />
 
         <Route path="/watch/:id" element={<Watch />} />
+
 
         <Route path="*" element={<Notfound />} />
       </Route>

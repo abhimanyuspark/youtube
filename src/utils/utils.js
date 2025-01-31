@@ -11,5 +11,10 @@ export function formatViews(views = "") {
 export function formateSecounds(seconds = 0) {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
-  return `${minutes}m : ${remainingSeconds}s`;
+  if(seconds <= 60){
+    return `00m : ${remainingSeconds}s`;
+  }else{
+    return `${minutes}m : ${remainingSeconds}s`;
+  }
+  
 }

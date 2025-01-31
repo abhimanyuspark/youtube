@@ -48,17 +48,17 @@ const HomeCard = ({ content }) => {
 
         {/* badge */}
 
-        {content?.isLiveNow === true && (
-          <div className="absolute bottom-2 right-2 flex gap-2">
-            <span className="bg-black flex items-center gap-1 text-white px-1 text-sm rounded-sm">
-              {formateSecounds(content?.lengthSeconds)}
-            </span>
+        <div className="absolute bottom-2 right-2 flex gap-2">
+          {content?.lengthSeconds !== null ? <span className="bg-[rgba(0,0,0,0.7)] flex items-center gap-1 text-white px-1 text-sm rounded-sm">
+            {formateSecounds(content?.lengthSeconds)}
+          </span> : ""}
+          {content?.isLiveNow === true && (
             <span className="bg-red-600 flex items-center gap-1 text-white px-1 text-sm rounded-sm">
               <IoRadio />
               {content?.badges?.[0]}
             </span>
-          </div>
-        )}
+          )}
+        </div>
 
         {/* on hover play */}
 
