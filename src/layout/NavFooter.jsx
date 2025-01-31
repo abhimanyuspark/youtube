@@ -6,7 +6,7 @@ const NavFooter = () => {
   const { isLogin, appUser } = useSelector((state) => state.auth);
 
   return (
-    <div className="flex gap-4 items-center">
+    <div className="flex fixed bg-gray-950 sm:p-0 p-4 bottom-0 left-0 sm:w-auto w-full sm:static gap-2 items-center justify-end sm:border-gray-950 sm:border-t-0 border-t border-gray-800">
       {/* Sign In && Sign Up */}
       <Auth isLogin={isLogin} user={appUser} />
     </div>
@@ -17,7 +17,7 @@ const Auth = ({ isLogin , user }) => {
   return (
     <div>
       {isLogin ? (
-        <div className="rounded-full overflow-hidden size-10"><img src={user?.avatar} className="size-full object-cover" /></div>
+        <div className="rounded-full overflow-hidden size-10">{user.avatar && <img src={user?.avatar} className="size-full object-cover" />}</div>
       ) : (
         <Link to="/signUp" className="border border-gray-900 rounded-full px-4 h-10 flex items-center justify-center">Sign Up</Link>
       )}
