@@ -6,6 +6,7 @@ import HomeLayout from "./layout/HomeLayout";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userDetails } from "./redux/server/authServer";
+import {Channel} from './pages/__root/channel'
 
 function App() {
   const { appUser } = useSelector((state) => state.auth);
@@ -24,6 +25,7 @@ function App() {
         {category?.slice(1)?.map((c, i) => (
           <Route key={i} path={c.path} element={<Explore category={c} />} />
         ))}
+        <Route path ='/channel' element ={<Channel/>}/>
       </Route>
 
       <Route element={<Layout />}>
@@ -31,6 +33,7 @@ function App() {
         <Route path="/signIn" element={<SignIn />} />
 
         <Route path="/watch/:id" element={<Watch />} />
+
 
         <Route path="*" element={<Notfound />} />
       </Route>

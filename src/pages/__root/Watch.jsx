@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { VideoPlayer } from "../../components";
 import { VideoDetails, videoComment, relatedVideo } from "./demo";
@@ -53,7 +53,7 @@ const Watch = () => {
                   <img src={""} alt="" />
                 </div>
                 <div className=" mx-2">
-                  <p>{data.Channeltitle}</p>
+                 <Link to={'/channel'} ><p>{data.Channeltitle}</p></Link> 
                   <p className="font-extralight text-sm ">4.7M Subscriber</p>
                 </div>
                 <div className="min-h-10 min-w-25 bg-white text-black flex items-center justify-center rounded-3xl font-semibold mx-4">

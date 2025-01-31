@@ -1058,3 +1058,49 @@ export const relatedVideo = [
     },
   },
 ];
+
+
+export const ChannelData =[
+  {
+    "artistBio": null,
+    "avatar": [
+      {
+        "height": 48,
+        "url": "https://yt3.ggpht.com/ytc/AKedOLQhW5ilWNDmw4kpwrVc899jT-sx0AJjg5pZJVpqbGY=s48-c-k-c0x00ffffff-no-rj",
+        "width": 48
+      }
+    ],
+    "badges": [
+      {
+        "text": "Verified",
+        "type": "VERIFIED_CHANNEL"
+      }
+    ],
+    "banner": {
+      "desktop": [
+        {
+          "height": 175,
+          "url": "https://yt3.ggpht.com/_qUjnd6iVb4pjy4F_kyL0IwUajCFmcuAHFKS4UKGQVgxBUrpgsOMXUwaBWI4I5GFtIH3Fk-LMQ=w1060-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj",
+          "width": 1060
+        }
+      ],
+      "mobile": [],
+      "tv": []
+    },
+    "canonicalBaseUrl": "/c/WWE",
+    "channelId": "UCJ5v_MCY6GNUBTO8-D3XoAg",
+    "country": null,
+    "description": "WWE on YouTube is your number one spot to catch WWE original shows and exclusives! Watch videos from all of your favorite WWE Superstars, backstage fallout from live shows including Raw, SmackDown, NXT and original shows such as Top 10, List This, WWE's The Bump and much more! Subscribe - https://goo.gl/2YO0Is Stream WWE on Peacock https://pck.tv/2PIAQJI in the U.S. and on WWE Network http://wwe.yt/wwenetwork everywhere else.",
+    "hasBusinessEmail": false,
+    "joinedDate": "2007-05-10",
+    "joinedDateText": "Joined May 10, 2007",
+    "keywords": [],
+    "links": [],
+    "stats": {
+      "subscribers": 88900000,
+      "subscribersText": "88.9M subscribers",
+      "views": 69263586611
+    },
+    "title": "WWE"
+  }
+]
