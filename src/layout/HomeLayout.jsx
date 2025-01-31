@@ -10,29 +10,28 @@ import {
 } from "../hooks";
 import HomeNav from "./HomeNav";
 import NavContent from "./NavContent";
+import NavFooter from "./NavFooter";
 
 const HomeLayout = () => {
   const isOnline = useIternetCheck();
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useMediaQuery("(max-width: 480px)");
 
   const [localStorage, setLocalStorage] = useLocalStorage("menu", false);
   const [toggle, handleToggle] = useToggle(localStorage);
 
   const onToggle = () => {
     handleToggle();
-    if (!isMobile) {
-      setLocalStorage(!toggle);
-    }
+    setLocalStorage(!toggle);
   };
 
   return (
     <div>
       <nav className={`sticky z-50 top-0`}>
-        <HomeNav toggle={toggle} handleToggle={onToggle} />
+        <HomeNav toggle={toggle} isMobile={isMobile} handleToggle={onToggle} />
       </nav>
 
       <div className="flex">
-        <Side toggle={toggle} isMobile={isMobile} handleToggle={handleToggle} />
+        {!isMobile && <Side toggle={toggle} />}
 
         <main className="flex-1">
           <Suspense fallback={<Loader />}>
@@ -40,35 +39,32 @@ const HomeLayout = () => {
           </Suspense>
         </main>
       </div>
+
+      {isMobile && <Footer />}
     </div>
   );
 };
 
-const Side = ({ toggle, isMobile, handleToggle }) => {
+const Side = ({ toggle }) => {
   const scrollTop = useScrollToTop();
 
   return (
     <aside
       className={`${scrollTop ? "bg-black" : ""} ${
-        isMobile
-          ? toggle
-            ? "left-0 bg-gray-950"
-            : "-left-60"
-          : toggle
-          ? "w-60"
-          : "w-20"
-      } fixed sm:sticky z-10 top-15 h-[calc(100vh-60px)]`}
+        toggle ? "w-60" : "w-20"
+      } sticky z-10 top-15 h-[calc(100vh-60px)]`}
     >
       {/* content */}
-      <NavContent
-        handleToggle={() => {
-          if (isMobile) {
-            handleToggle(false);
-          }
-        }}
-        toggle={toggle}
-      />
+      <NavContent toggle={toggle} />
     </aside>
+  );
+};
+
+const Footer = () => {
+  return (
+    <footer className="fixed border-t border-gray-900 bottom-0 left-0 w-full p-2 bg-gray-950 flex justify-end items-center">
+      <NavFooter />
+    </footer>
   );
 };
 

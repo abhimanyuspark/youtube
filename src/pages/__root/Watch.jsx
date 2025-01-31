@@ -53,7 +53,7 @@ const Watch = () => {
                   <img src={""} alt="" />
                 </div>
                 <div className=" mx-2">
-                 <Link to={'/channel'} ><p>{data.Channeltitle}</p></Link> 
+                 <Link to={`/channel/${data.author.channelId}`} ><p>{data.Channeltitle}</p></Link> 
                   <p className="font-extralight text-sm ">4.7M Subscriber</p>
                 </div>
                 <div className="min-h-10 min-w-25 bg-white text-black flex items-center justify-center rounded-3xl font-semibold mx-4">
