@@ -1,7 +1,9 @@
 import React from "react";
 import { useClickOutside, useScrollToTop, useToggle } from "../hooks";
-import NavContent from "./NavContent"
+import NavContent from "./NavContent";
 import NavHeader from "./NavHeader";
+import NavSearch from "./NavSearch";
+import NavFooter from "./NavFooter";
 
 const Nav = () => {
   const [toggle, handleToggle] = useToggle();
@@ -10,11 +12,13 @@ const Nav = () => {
 
   return (
     <div
-      className={`flex justify-between items-center px-7 h-15 relative ${
+      className={`flex justify-between items-center px-7 h-15 ${
         scrollTop ? "bg-black" : ""
       }`}
     >
-      <NavHeader handleToggle={handleToggle}  />
+      <NavHeader handleToggle={handleToggle} />
+      <NavSearch />
+      <NavFooter />
 
       {toggle && (
         <div
@@ -24,7 +28,12 @@ const Nav = () => {
           } w-60 fixed z-10 top-0 left-0 h-full`}
         >
           {/* headers */}
-          <NavHeader className="px-7 h-15" handleToggle={()=> {handleToggle(false)}}  />
+          <NavHeader
+            className="px-7 h-15"
+            handleToggle={() => {
+              handleToggle(false);
+            }}
+          />
           {/* content */}
           <NavContent />
         </div>
@@ -32,7 +41,5 @@ const Nav = () => {
     </div>
   );
 };
-
-
 
 export default Nav;
