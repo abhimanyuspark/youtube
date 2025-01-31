@@ -1,4 +1,4 @@
-import { Dashboard, Notfound, Explore, Watch, SignUp, SignIn } from "./pages";
+import { Dashboard, Notfound, Explore, Watch, SignUp, SignIn, Channel } from "./pages";
 import { Route, Routes } from "react-router";
 import Layout from "./layout/Layout";
 import { NavigationData as category } from "./utils/constants";
@@ -6,7 +6,6 @@ import HomeLayout from "./layout/HomeLayout";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userDetails } from "./redux/server/authServer";
-import {Channel} from './pages/__root/channel'
 
 function App() {
   const { appUser } = useSelector((state) => state.auth);
@@ -16,7 +15,7 @@ function App() {
     if (appUser?.id) {
       dispatch(userDetails(appUser?.id));
     }
-  }, [dispatch]);
+  }, []);
 
   return (
     <Routes>

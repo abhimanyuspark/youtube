@@ -1,37 +1,49 @@
-import react, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChannelData } from "./demo";
+import { useSearchParams } from "react-router";
 
-export const Channel = () => {
-  const [description, setdiscription] = useState(false);
-  const [Home, setHome] = useState(true);
-  const [Video, setVideo] = useState(false);
-  const [playlists, setplaylists] = useState(false);
+const tabs = [{ tab: "Home" }, { tab: "Video" }, { tab: "Playlists" }];
 
-  const HandleHomeClick = () => {
-    setHome(true);
-    setVideo(false);
-    setplaylists(false);
+const Channel = () => {
+  const [description, setDescription] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tabParam = searchParams.get("tab");
+  const initialTab = tabs.find((t) => t.tab === tabParam) || tabs[0];
+  const [tab, setTab] = useState(initialTab);
+
+  const onChangeTab = (t) => {
+    setTab(t);
+    setSearchParams({ tab: t.tab });
   };
-  const HandleVideoClick = () => {
-    setVideo(true);
-    setHome(false);
-    setplaylists(false);
-  };
-  const HandlePlaylistsClick = () => {
-    setplaylists(true);
-    setHome(false);
-    setVideo(false);
-  };
+
+  useEffect(() => {
+    if (searchParams) {
+      const tabParam = searchParams.get("tab");
+      const newTab = tabs.find((t) => t.tab === tabParam) || tabs[0];
+      setTab(newTab);
+    }
+  }, [searchParams]);
+
   return (
     <div>
       {ChannelData.map((data, index) => (
         <div key={index} className="pl-30 pr-30">
-          <div className="w-full h-43 bg-black rounded-2xl">
-            <img src="" alt="" className="w-full h-full rounded-2xl" />
+          <div className="w-full h-45 bg-black rounded-2xl overflow-hidden">
+            {data.banner.mobile.length > 0 ? (
+              <img src="" alt="" className="w-full h-full" />
+            ) : (
+              <div className="text-center">{data.title}</div>
+            )}
           </div>
           <div className="flex mt-8 ">
-            <div className="w-45 h-45 rounded-full bg-black">
-              <img src="" alt="" className="w-full h-full rounded-full" />
+            <div className="w-45 h-45 rounded-full overflow-hidden bg-black">
+              {data.avatar[0].url && (
+                <img
+                  src={data.avatar[0].url}
+                  alt=""
+                  className="w-full h-full"
+                />
+              )}
             </div>
             <div className="ml-5 text-base/8">
               <div className="text-3xl font-bold">{data.title}</div>
@@ -42,7 +54,18 @@ export const Channel = () => {
                 </p>
               </div>
               <div>
-                <p>{data.description.slice(0, 51)} ...more</p>
+                <p
+                  onClick={() => {
+                    setDescription(!description);
+                  }}
+                  className="cursor-pointer"
+                >
+                  {data.description.slice(
+                    0,
+                    description ? data.description.length : 51
+                  )}{" "}
+                  ...more
+                </p>
               </div>
               <div className="min-h-10 w-30 bg-white text-black flex items-center justify-center rounded-3xl font-semibold mt-2">
                 <p>Subscribe</p>
@@ -51,30 +74,21 @@ export const Channel = () => {
           </div>
         </div>
       ))}
-      <div className="mt-5 pl-22 pr-30">
-        <button
-          className="w-30 h-19 "
-          style={{ borderBottom: Home ? "4px solid white" : "" }}
-          onClick={HandleHomeClick}
-        >
-          Home
-        </button>
-        <button
-          className="w-30 h-19"
-          style={{ borderBottom: Video ? "4px solid white" : "" }}
-          onClick={HandleVideoClick}
-        >
-          Videos
-        </button>
-        <button
-          className="w-30 h-19 "
-          style={{ borderBottom: playlists ? "4px solid white" : "" }}
-          onClick={HandlePlaylistsClick}
-        >
-          Playlists
-        </button>
+      <div className="mt-5 pl-22 pr-30 sticky top-15">
+        {tabs.map((t, i) => (
+          <button
+            key={i}
+            className="w-30 h-19 cursor-pointer"
+            style={{ borderBottom: t.tab === tab.tab ? "4px solid white" : "" }}
+            onClick={() => onChangeTab(t)}
+          >
+            {t.tab}
+          </button>
+        ))}
       </div>
-      <hr className="mt-1"/>
+      <hr className="mt-1" />
     </div>
   );
 };
+
+export default Channel;
