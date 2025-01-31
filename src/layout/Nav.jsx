@@ -10,7 +10,7 @@ const Nav = () => {
 
   return (
     <div
-      className={`flex justify-between items-center px-7 h-15 ${
+      className={`flex justify-between items-center px-7 h-15 relative ${
         scrollTop ? "bg-black" : ""
       }`}
     >

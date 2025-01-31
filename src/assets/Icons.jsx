@@ -1,5 +1,5 @@
 import { IoRadio, IoMusicalNotesOutline } from "react-icons/io5";
-import { FaBars, FaFire, FaYoutube, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaBars, FaFire, FaYoutube, FaEye, FaEyeSlash, FaSearch } from "react-icons/fa";
 import { GiGraduateCap, GiHanger } from "react-icons/gi";
 import {
   MdPlaylistPlay,
@@ -24,6 +24,7 @@ export {
   FaYoutube,
   FaEye,
   FaEyeSlash,
+  FaSearch,
   MdPlaylistPlay,
   MdMovie,
   MdNewspaper,

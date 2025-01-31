@@ -24,7 +24,7 @@ function App() {
         {category?.slice(1)?.map((c, i) => (
           <Route key={i} path={c.path} element={<Explore category={c} />} />
         ))}
-        <Route path ='/channel' element ={<Channel/>}/>
+        <Route path ='/channel/:id' element ={<Channel/>}/>
       </Route>
 
       <Route element={<Layout />}>

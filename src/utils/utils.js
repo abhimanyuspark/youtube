@@ -9,12 +9,9 @@ export function formatViews(views = "") {
 }
 
 export function formateSecounds(seconds = 0) {
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = seconds % 60;
-  if(seconds <= 60){
-    return `00m : ${remainingSeconds}s`;
-  }else{
-    return `${minutes}m : ${remainingSeconds}s`;
-  }
-  
+  const hours = `${Math.floor(seconds / 3600)} : `;
+  const minutes = `${Math.floor((seconds % 3600) / 60)} : `;
+  const remainingSeconds = `${seconds % 60}`;
+
+  return `${hours.toString().padStart(2, '0')} ${minutes.toString().padStart(2, '0')} ${remainingSeconds.toString().padStart(2, '0')}`;
 }

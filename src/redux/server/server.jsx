@@ -2,8 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const BASE_URL = "https://youtube138.p.rapidapi.com";
-const apiKey = "6977a24db8msha68a6a2adc38fc6p12d6f9jsnb57ccb5fa9f4"
-// const apiKey = "ce41d978abmsh82fbaac007ae589p1ec88cjsnf89c9f75901d"
+// const apiKey = "6977a24db8msha68a6a2adc38fc6p12d6f9jsnb57ccb5fa9f4"
+const apiKey = "ce41d978abmsh82fbaac007ae589p1ec88cjsnf89c9f75901d"
 
 const options = {
   params: { hl: "en", gl: "US" },
