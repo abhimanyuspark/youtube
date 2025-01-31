@@ -9,9 +9,9 @@ const Explore = ({ category }) => {
   const { url, title } = category;
   const { videos, error, loading } = useSelector((state) => state.youtube);
 
-  // useEffect(() => {
-  //   dispatch(fetchVideos(url));
-  // }, [dispatch, url]);
+  useEffect(() => {
+    dispatch(fetchVideos(url));
+  }, [dispatch]);
 
   if (error?.message) {
     return <Error error={error?.message} />;

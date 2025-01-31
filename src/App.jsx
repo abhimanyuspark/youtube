@@ -15,7 +15,7 @@ function App() {
     if (appUser?.id) {
       dispatch(userDetails(appUser?.id));
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <Routes>
