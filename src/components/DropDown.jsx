@@ -10,7 +10,7 @@ const DropDown = ({ children }) => {
 
   const dropdownRef = useDropdownPosition({
     toggle: toggle,
-    top:44
+    top: 44,
   });
 
   return (
@@ -29,7 +29,7 @@ const DropDown = ({ children }) => {
         ref={dropdownRef}
         className={`${
           toggle ? "block" : "hidden"
-        } absolute rounded-xl w-60 right-0 h-auto bg-gray-900 py-2 shadow-md *:p-2 *:hover:bg-gray-800 *:flex *:gap-8 *:items-center *:cursor-pointer`}
+        } absolute rounded-xl w-60 right-0 h-auto bg-gray-900 py-2 shadow-md *:py-2 *:px-4 *:hover:bg-gray-800 *:flex *:gap-6 *:items-center *:cursor-pointer`}
       >
         {children}
       </ul>

@@ -156,7 +156,7 @@ export const addChannelSubscribe = createAsyncThunk(
         updatedChannels = [...(user?.subscribedChannels || []), channel];
       } else if (action === "delete") {
         updatedChannels = user?.subscribedChannels?.filter(
-          (existingChannel) => existingChannel?.videoId !== channel?.videoId
+          (existingChannel) => existingChannel?.author?.channelId !== channel?.author?.channelId
         );
       } else {
         throw new Error("Invalid action. Use 'add' or 'delete'.");

@@ -11,7 +11,7 @@ const SubscribeButton = ({ data }) => {
   useEffect(() => {
     if (appUser && data?.videoId) {
       const c = appUser?.subscribedChannels?.some(
-        (item) => item?.videoId === data.videoId
+        (item) => item?.author?.channelId === data?.author?.channelId
       );
       setCheck(c);
     }

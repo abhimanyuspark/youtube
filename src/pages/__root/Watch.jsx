@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { VideoPlayer, DropDown } from "../../components";
+import { VideoPlayer, DropDown, Model } from "../../components";
 import { VideoDetails, videoComment, relatedVideo } from "./demo";
 import {
   MdOutlineKeyboardArrowDown,
@@ -11,6 +11,7 @@ import {
   SlLike,
   SlDislike,
   TiArrowForwardOutline,
+  MdPlaylistPlay,
 } from "../../assets/Icons";
 import { fetchVideoDetails } from "../../redux/server/server";
 import SubscribeButton from "../__comp/SubscribeButton";
@@ -20,6 +21,8 @@ const Watch = () => {
   // const { alldetails, loading, error } = useSelector((state) => state.details);
   // const { appUser } = useSelector((state) => state.auth);
   const [descriptionLines, setdescriptionLines] = useState(false);
+  const [playList, setPlayList] = useState(false);
+
   const { id } = useParams();
 
   const handleCLick = () => {
@@ -71,14 +74,11 @@ const Watch = () => {
                 </div>
 
                 <div>
-                  <DropDown>
-                    <li>
-                      <TiArrowForwardOutline className="text-2xl" /> Shear
-                    </li>
-                    <li>
-                      <MdOutlineFileDownload className="text-2xl" /> Download
-                    </li>
-                  </DropDown>
+                  <Menu
+                    onOpen={() => {
+                      setPlayList(true);
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -184,7 +184,40 @@ const Watch = () => {
           </div>
         ))}
       </div>
+
+      <MyPlayLists
+        playList={playList}
+        onClose={() => {
+          setPlayList(false);
+        }}
+      />
     </div>
+  );
+};
+
+const MyPlayLists = ({ playList, onClose }) => {
+  return (
+    <Model open={playList} onClose={onClose} label="My PlayLists">
+      <li>Abhimanyu</li>
+      <li>Favrioute</li>
+      <li>Games</li>
+    </Model>
+  );
+};
+
+const Menu = ({ onOpen }) => {
+  return (
+    <DropDown>
+      <li>
+        <TiArrowForwardOutline className="text-2xl" /> Share
+      </li>
+      <li>
+        <MdOutlineFileDownload className="text-2xl" /> Download
+      </li>
+      <li onClick={onOpen}>
+        <MdPlaylistPlay className="text-2xl" /> Save To PlayList
+      </li>
+    </DropDown>
   );
 };
 
