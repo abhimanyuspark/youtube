@@ -65,10 +65,10 @@ export const updateMyAlbums = createAsyncThunk(
 
       if (action === "add") {
         // Add the new album to the list
-        updatedAlbums = [...(user?.myBooks || []), album];
+        updatedAlbums = [...(user?.playList || []), album];
       } else if (action === "delete") {
         // Remove the album by a unique key (e.g., title or id)
-        updatedAlbums = user?.myBooks?.filter(
+        updatedAlbums = user?.playList?.filter(
           (existingAlbum) => existingAlbum.title !== album.title
         );
       } else {
@@ -77,7 +77,7 @@ export const updateMyAlbums = createAsyncThunk(
 
       // Step 3: Update the user's data
       const res = await axios.put(`${authURL}/${id}`, {
-        myBooks: updatedAlbums,
+        playList: updatedAlbums,
       });
 
       return res.data; // Return the updated albums
@@ -138,6 +138,40 @@ export const updateBookInMyBooks = createAsyncThunk(
     } catch (error) {
       throw new Error(
         error.response?.data?.message || "Failed to update myBooks"
+      );
+    }
+  }
+);
+
+export const addChannelSubscribe = createAsyncThunk(
+  "auth/addChannelSubscribe",
+  async ({ id, channel, action }) => {
+    try {
+      // Step 1: Fetch the existing user data
+      const { data: user } = await axios.get(`${authURL}/${id}`);
+
+      // Step 2: Determine whether to add or delete the channel
+      let updatedChannels;
+      if (action === "add") {
+        updatedChannels = [...(user?.subscribedChannels || []), channel];
+      } else if (action === "delete") {
+        updatedChannels = user?.subscribedChannels?.filter(
+          (existingChannel) => existingChannel?.videoId !== channel?.videoId
+        );
+      } else {
+        throw new Error("Invalid action. Use 'add' or 'delete'.");
+      }
+
+      // Step 3: Update the user's data with the new subscribed channels list
+      const response = await axios.put(`${authURL}/${id}`, {
+        subscribedChannels: updatedChannels,
+      });
+
+      return response.data; // Return the updated user data
+    } catch (error) {
+      console.error(error);
+      throw new Error(
+        error.response?.data?.message || "Failed to update subscribed channels"
       );
     }
   }

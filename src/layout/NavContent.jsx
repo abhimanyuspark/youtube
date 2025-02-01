@@ -5,8 +5,8 @@ import { NavigationData as data } from "../utils/constants";
 const NavContent = ({ handleToggle, toggle = true }) => {
   return (
     <ul className="px-2 py-2 flex flex-col gap-0.5 h-[calc(100vh-60px)] overflow-y-auto overflow-x-hidden scroll">
-      {data.slice(0, toggle ? data.length : 2).map((n, i) => (
-        <li key={i} onClick={handleToggle}>
+      {data.slice(0, toggle ? data.length : 3).map((n, i) => (
+        <li key={i} onClick={handleToggle} title={n.title}>
           <Item n={n} toggle={toggle} />
           {n?.divider === true && toggle && (
             <hr className="border-t border-gray-700 mt-2.5 mb-2" />
@@ -28,7 +28,7 @@ const Item = ({ n, toggle }) => {
       to={n.path}
     >
       <n.icon className="size-6" />
-      <span className={`${toggle ? "text-md" : "text-xs"}`}>{n.title}</span>
+      <span className={`${toggle ? "text-md" : "text-[10px] text-center"}`}>{n.title}</span>
     </NavLink>
   );
 };

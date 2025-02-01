@@ -10,7 +10,8 @@ const SignUp = () => {
     name: "",
     email: "",
     password: "",
-    subscribeList: [],
+    subscribedChannels: [],
+    playLists:[],
   });
   const [formError, setFormError] = useState({
     name: "",

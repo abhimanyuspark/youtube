@@ -52,15 +52,15 @@ const SearchInput = () => {
       onSubmit={onSubmit}
       className={`${
         focus ? "border-blue-500" : "border-gray-900"
-      } w-auto pl-4 h-10 rounded-full bg-transparent border  flex overflow-hidden`}
+      } pl-4 h-10 rounded-full bg-transparent border flex overflow-hidden`}
     >
       {focus && (
-        <div className="h-full flex items-center pr-2">
+        <div className="h-full flex items-center pr-3">
           <FaSearch className="size-4" />
         </div>
       )}
       <input
-        className="w-120 sm:w-80 lg:w-120 outline-0"
+        className="w-100 sm:w-120 outline-0"
         value={query}
         onChange={(e) => {
           setQuery(e.target.value);

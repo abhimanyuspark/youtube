@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { VideoPlayer } from "../../components";
+import { VideoPlayer, DropDown } from "../../components";
 import { VideoDetails, videoComment, relatedVideo } from "./demo";
 import {
   MdOutlineKeyboardArrowDown,
@@ -13,55 +13,54 @@ import {
   TiArrowForwardOutline,
 } from "../../assets/Icons";
 import { fetchVideoDetails } from "../../redux/server/server";
+import SubscribeButton from "../__comp/SubscribeButton";
 
 const Watch = () => {
-  const { alldetails, loading, error } = useSelector((state) => state.details);
+  const dispatch = useDispatch();
+  // const { alldetails, loading, error } = useSelector((state) => state.details);
+  // const { appUser } = useSelector((state) => state.auth);
   const [descriptionLines, setdescriptionLines] = useState(false);
-  const [reply, setReply] = useState(false);
   const { id } = useParams();
 
   const handleCLick = () => {
     setdescriptionLines(!descriptionLines);
   };
 
-  const handlereply = () => {
-    setReply(!reply);
-  };
-
-  const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(fetchVideoDetails(id));
   }, [dispatch, id]);
 
-  console.log(alldetails, loading, error?.message);
-
   return (
-    <div className="flex grid-cols-2 gap-4 flex-wrap">
-      <div className="w-5xl p-5">
+    <div className="grid sm:grid-cols-[1fr_400px] grid-cols-1 gap-6 sm:p-4 p-2">
+      <div>
         <div className="rounded-none lg:rounded-2xl overflow-hidden w-full h-100 ">
           <VideoPlayer videoId={id} />
         </div>
+
         {VideoDetails.map((data, index) => (
-          <div className="my-4" key={index}>
+          <div className="py-4" key={index}>
             <p className="flex items-center gap-2 font-bold text-xl">
               {data.title}
             </p>
-            <div className="flex items-center justify-between ">
-              <div className="flex items-center">
-                <div className="size-[55px] bg-black my-4 rounded-3xl ">
+
+            <div className="flex items-center justify-between flex-col sm:flex-row sm:mb-0 mb-4">
+              <div className="flex items-center justify-between w-full sm:w-auto">
+                <div className="size-[55px] bg-black my-4 rounded-3xl">
                   <img src={""} alt="" />
                 </div>
-                <div className=" mx-2">
-                 <Link to={`/channel/${data.author.channelId}`} ><p>{data.Channeltitle}</p></Link> 
+
+                <div className="mx-2">
+                  <Link to={`/channel/${data.author.channelId}`}>
+                    <p>{data.Channeltitle}</p>
+                  </Link>
                   <p className="font-extralight text-sm ">4.7M Subscriber</p>
                 </div>
-                <div className="min-h-10 min-w-25 bg-white text-black flex items-center justify-center rounded-3xl font-semibold mx-4">
-                  Subscribe
-                </div>
+
+                <SubscribeButton data={data} />
               </div>
-              <div className="flex items-center justify-between ">
-                <div className="flex w-35 h-10 bg-gray-900 items-center justify-between p-3 rounded-xl mr-2">
+
+              <div className="flex items-center justify-between gap-2 w-full sm:w-auto">
+                <div className="flex w-35 h-10 bg-gray-900 items-center justify-between p-3 rounded-xl">
                   <div className="flex border-r-1 p-1">
                     <SlLike className=" text-2xl mr-3" />
                     <span className="mr-2">{data.stats.likes}</span>
@@ -70,14 +69,20 @@ const Watch = () => {
                     <SlDislike />
                   </div>
                 </div>
-                <div className="flex items-center mr-2 justify-center rounded-xl  w-22 h-10 bg-gray-900">
-                  <TiArrowForwardOutline className="text-2xl" /> shear
-                </div>
-                <div className="flex items-center justify-center rounded-xl  w-28 h-10 bg-gray-900">
-                  <MdOutlineFileDownload className="text-2xl" /> download
+
+                <div>
+                  <DropDown>
+                    <li>
+                      <TiArrowForwardOutline className="text-2xl" /> Shear
+                    </li>
+                    <li>
+                      <MdOutlineFileDownload className="text-2xl" /> Download
+                    </li>
+                  </DropDown>
                 </div>
               </div>
             </div>
+
             <div className="w-full h-full bg-gray-800 p-2 rounded-2xl mb-4">
               <div className="flex flex-wrap">
                 <p className="font-bold w-xl">
@@ -104,9 +109,10 @@ const Watch = () => {
                 )}
               </div>
               <p className="mt-2 cursor-pointer" onClick={handleCLick}>
-                {descriptionLines == false ? "...more" : "show less"}
+                {descriptionLines == false ? "...more" : "less"}
               </p>
             </div>
+
             <div className="flex justify-between w-xs">
               <p className="font-bold w-xl">{data.stats.comments} comments</p>
               <div className="flex w-2xs justify-center items-center">
@@ -118,60 +124,54 @@ const Watch = () => {
             </div>
           </div>
         ))}
-        <div>
-          {videoComment.map((comments, index) => (
-            <div key={index}>
-              <div className="flex items-center mt-6">
-                <div className="size-[55px] bg-black my-4 rounded-3xl ">
-                  <img src={""} alt="" />
+
+        {videoComment.map((comments, index) => (
+          <div key={index}>
+            <div className="flex items-center mt-6">
+              <div className="size-[55px] bg-black my-4 rounded-full">
+                <img src={""} alt="" />
+              </div>
+              <div className="ml-3">
+                <p className="font-bold">
+                  {comments.author.title}{" "}
+                  <span className="text-xs text-gray-400">
+                    {comments.publishedTimeText}
+                  </span>
+                </p>
+                <p>{comments.content}</p>
+                <div className="flex justify-between w-32 mt-3">
+                  <div className="flex items-center ">
+                    <SlLike className="mr-2" /> {comments.stats.votes}
+                  </div>
+                  <div className="flex items-center ">
+                    <SlDislike className="mr-2" />
+                  </div>
+                  <div>Reply</div>
                 </div>
-                <div className="ml-3">
-                  <p className="font-bold">
-                    {comments.author.title}{" "}
-                    <span className="text-xs text-gray-400">
-                      {comments.publishedTimeText}
-                    </span>
-                  </p>
-                  <p>{comments.content}</p>
-                  <div className="flex justify-between w-32 mt-3">
-                    <div className="flex items-center ">
-                      <SlLike className="mr-2" /> {comments.stats.votes}
-                    </div>
-                    <div className="flex items-center ">
-                      <SlDislike className="mr-2" />
-                    </div>
-                    <div>Reply</div>
-                  </div>
-                  <div className=" mt-3">
-                    <div
-                      className="flex items-center text-blue-400"
-                      onClick={handlereply}
-                    >
-                      {reply == false ? (
-                        <MdOutlineKeyboardArrowDown className="text-3xl font-thin" />
-                      ) : (
-                        <MdOutlineKeyboardArrowUp className="text-3xl font-thin" />
-                      )}{" "}
-                      replies
-                    </div>
-                  </div>
+                <div className=" mt-3">
+                  <Replys />
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
-      <div>
+
+      <div className="flex gap-4 flex-wrap">
         {relatedVideo.map((data, index) => (
-          <div key={index} className="flex mb-2 w-full ">
-            <div className="w-45 h-25">
+          <div
+            key={index}
+            className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-4 sm:grid-rows-[100px] grid-rows-1"
+          >
+            <div>
               <img
                 className="rounded-2xl w-full h-full"
                 src={data.video.avatarThumbnailUrl}
                 alt="img"
               />
             </div>
-            <div className="flex flex-wrap w-70 ml-2">
+
+            <div className="flex flex-wrap">
               <p>{data.video.title}</p>
               <div className=" text-gray-400 text-sm">
                 <p>{data.video.author.title}</p>
@@ -184,6 +184,24 @@ const Watch = () => {
           </div>
         ))}
       </div>
+    </div>
+  );
+};
+
+const Replys = () => {
+  const [reply, setReply] = useState(true);
+
+  return (
+    <div
+      className="flex items-center text-blue-400"
+      onClick={() => setReply(!reply)}
+    >
+      {reply ? (
+        <MdOutlineKeyboardArrowDown className="text-3xl font-thin" />
+      ) : (
+        <MdOutlineKeyboardArrowUp className="text-3xl font-thin" />
+      )}{" "}
+      replies
     </div>
   );
 };

@@ -10,7 +10,7 @@ import {
   MdOutlineFileDownload,
   MdOutlineSort,
 } from "react-icons/md";
-import { BsCollectionPlay } from "react-icons/bs";
+import { BsCollectionPlay, BsThreeDotsVertical } from "react-icons/bs";
 import { SiYoutubegaming } from "react-icons/si";
 import { CiTrophy } from "react-icons/ci";
 import { TiHome, TiArrowForwardOutline } from "react-icons/ti";
@@ -31,6 +31,7 @@ export {
   GiHanger,
   GiGraduateCap,
   BsCollectionPlay,
+  BsThreeDotsVertical,
   SiYoutubegaming,
   CiTrophy,
   TiHome,
