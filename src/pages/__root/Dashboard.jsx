@@ -23,6 +23,7 @@ const Dashboard = ({ category }) => {
     return <Error error="No Data found" />
   }
 
+
   return (
     <div>
       <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 p-4">
