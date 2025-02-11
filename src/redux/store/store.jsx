@@ -3,6 +3,7 @@ import youtubeReducer from "../fetures/youtubeSlice";
 import videoDetails from "../fetures/videoDetailsSlice";
 import authReducers from "../fetures/authSlice";
 import videoComments from "../fetures/videoCommentsSlice";
+import AllchannelVideos from "../fetures/channelVideoSlice";
 
 
 export const store = configureStore({
@@ -11,6 +12,7 @@ export const store = configureStore({
     details: videoDetails,
     auth: authReducers,
     allcomments: videoComments,
+    ChannelVideos: AllchannelVideos,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
