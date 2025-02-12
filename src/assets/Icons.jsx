@@ -1,5 +1,13 @@
 import { IoRadio, IoMusicalNotesOutline } from "react-icons/io5";
-import { FaBars, FaFire, FaYoutube, FaEye, FaEyeSlash, FaSearch } from "react-icons/fa";
+import {
+  FaBars,
+  FaFire,
+  FaYoutube,
+  FaEye,
+  FaEyeSlash,
+  FaSearch,
+  FaTimes,
+} from "react-icons/fa";
 import { GiGraduateCap, GiHanger } from "react-icons/gi";
 import {
   MdPlaylistPlay,
@@ -10,7 +18,7 @@ import {
   MdOutlineFileDownload,
   MdOutlineSort,
 } from "react-icons/md";
-import { BsCollectionPlay } from "react-icons/bs";
+import { BsCollectionPlay, BsThreeDotsVertical } from "react-icons/bs";
 import { SiYoutubegaming } from "react-icons/si";
 import { CiTrophy } from "react-icons/ci";
 import { TiHome, TiArrowForwardOutline } from "react-icons/ti";
@@ -25,12 +33,14 @@ export {
   FaEye,
   FaEyeSlash,
   FaSearch,
+  FaTimes,
   MdPlaylistPlay,
   MdMovie,
   MdNewspaper,
   GiHanger,
   GiGraduateCap,
   BsCollectionPlay,
+  BsThreeDotsVertical,
   SiYoutubegaming,
   CiTrophy,
   TiHome,

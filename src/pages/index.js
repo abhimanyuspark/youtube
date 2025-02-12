@@ -4,9 +4,13 @@ const Dashboard = lazy(() => import("./__root/Dashboard"));
 const Watch = lazy(() => import("./__root/Watch"));
 const Channel = lazy(() => import("./__root/channel"));
 const Explore = lazy(() => import("./__root/Explore"));
+
+const Subscriptions = lazy(() => import("./__root/Subscriptions"));
+const PlayLists = lazy(() => import("./__root/PlayLists"));
+
 const Notfound = lazy(() => import("./__auth/Notfound"));
 
 const SignUp = lazy(() => import("./__auth/SignUp"));
 const SignIn = lazy(() => import("./__auth/SignIn"));
 
-export { Dashboard, Notfound, Watch, Explore, SignIn, SignUp, Channel };
+export { Dashboard, Notfound, Watch, Explore, SignIn, SignUp, Channel, Subscriptions, PlayLists };

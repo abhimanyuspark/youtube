@@ -11,7 +11,11 @@ const Explore = ({ category }) => {
 
   useEffect(() => {
     dispatch(fetchVideos(url));
-  }, [dispatch]);
+  }, [dispatch, url]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   if (error?.message) {
     return <Error error={error?.message} />;
@@ -34,8 +38,6 @@ const Explore = ({ category }) => {
       >
         Watch page
       </Link>
-
-      {loading && <Loader />}
 
       {videos.length > 0 ? (
         <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 p-4">

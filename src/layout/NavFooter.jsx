@@ -13,13 +13,27 @@ const NavFooter = () => {
   );
 };
 
-const Auth = ({ isLogin , user }) => {
+const Auth = ({ isLogin, user }) => {
   return (
     <div>
       {isLogin ? (
-        <div className="rounded-full overflow-hidden size-10">{user.avatar && <img src={user?.avatar} className="size-full object-cover" />}</div>
+        <div className="rounded-full overflow-hidden size-10">
+          {/* {user.avatar && (
+            <img src={user?.avatar} className="size-full object-cover" />
+          )} */}
+          {user.name && (
+            <div className="bg-red-500 flex items-center justify-center size-full leading-0 font-semibold text-2xl first:uppercase pb-1">
+              {user?.name?.slice(0, 1)}
+            </div>
+          )}
+        </div>
       ) : (
-        <Link to="/signUp" className="border border-gray-900 rounded-full px-4 h-10 flex items-center justify-center">Sign Up</Link>
+        <Link
+          to="/signUp"
+          className="border border-gray-900 rounded-full px-4 h-10 flex items-center justify-center"
+        >
+          Sign Up
+        </Link>
       )}
     </div>
   );

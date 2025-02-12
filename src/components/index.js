@@ -5,5 +5,17 @@ import HomeCard from "./cards/HomeCard";
 import Offline from "./Offline";
 import { Input } from "./Inputs";
 import { Button } from "./Buttons";
+import DropDown from "./DropDown";
+import Model from "./Model";
 
-export { Loader, Error, VideoPlayer, HomeCard, Offline, Input, Button };
+export {
+  Loader,
+  Error,
+  VideoPlayer,
+  HomeCard,
+  Offline,
+  Input,
+  Button,
+  DropDown,
+  Model,
+};
