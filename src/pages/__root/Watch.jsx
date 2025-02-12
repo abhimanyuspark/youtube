@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { useParams } from "react-router";
-import { VideoPlayer, DropDown, Model } from "../../components";
+import { VideoPlayer } from "../../components";
 import { relatedVideo } from "./demo";
-
-import { all } from "axios";
 import { Details } from "../__comp/details";
 import { Comments } from "../__comp/comments";
 
 const Watch = () => {
-  // const { appUser } = useSelector((state) => state.auth);
   const [playList, setPlayList] = useState(false);
 
   const { id } = useParams();
@@ -20,7 +17,7 @@ const Watch = () => {
           <VideoPlayer videoId={id} />
         </div>
         <Details />
-<Comments/>
+        <Comments />
       </div>
 
       <div className="flex gap-4 flex-wrap">
@@ -53,7 +50,5 @@ const Watch = () => {
     </div>
   );
 };
-
-
 
 export default Watch;

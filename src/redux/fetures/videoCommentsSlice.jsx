@@ -18,7 +18,7 @@ const videoComments = createSlice({
       })
       .addCase(fetchVideoComments.fulfilled, (state, action) => {
         state.loading = false;
-        state.allComments = [action?.payload];
+        state.allComments = action?.payload?.comments;
       })
       .addCase(fetchVideoComments.rejected, (state, action) => {
         state.loading = false;
