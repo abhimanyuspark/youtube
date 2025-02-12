@@ -2,8 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const BASE_URL = "https://youtube138.p.rapidapi.com";
-// const apiKey = "6977a24db8msha68a6a2adc38fc6p12d6f9jsnb57ccb5fa9f4"
-const apiKey = "ce41d978abmsh82fbaac007ae589p1ec88cjsnf89c9f75901d"
+const apiKey = "ce8c1c1e5bmshba57c22924d4bf2p114948jsn5979f8cc39cb"
 
 const options = {
   params: { hl: "en", gl: "US" },
@@ -39,3 +38,34 @@ export const fetchVideoDetails = createAsyncThunk(
     }
   }
 );
+
+export const fetchVideoComments = createAsyncThunk(
+  "/video/comments/",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/video/comments/?id=${id}`,
+        options
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const fetchChannelVideo = createAsyncThunk(
+  "/channel/videos/",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/channel/videos/?id=${id}`,
+        options
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { ChannelData } from "./demo";
-import { useSearchParams } from "react-router";
+import { useSearchParams , useParams } from "react-router";
+import { fetchChannelVideo } from "../../redux/server/server";
+import {useSelector , useDispatch} from 'react-redux'
+
 
 const tabs = [{ tab: "Home" }, { tab: "Video" }, { tab: "Playlists" }];
 
@@ -10,6 +13,10 @@ const Channel = () => {
   const tabParam = searchParams.get("tab");
   const initialTab = tabs.find((t) => t.tab === tabParam) || tabs[0];
   const [tab, setTab] = useState(initialTab);
+  const { id } = useParams();
+  const { ChannelVideos } = useSelector((state) => state.ChannelVideos);
+
+
 
   const onChangeTab = (t) => {
     setTab(t);
@@ -24,6 +31,14 @@ const Channel = () => {
     }
   }, [searchParams]);
 
+
+  const dispatch = useDispatch();
+
+   useEffect(() => {
+      dispatch(fetchChannelVideo(id));
+    }, [dispatch, id]);
+  
+    console.log(ChannelVideos)
   return (
     <div>
       {ChannelData.map((data, index) => (
